@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Source: Bootstrap - Search Box Plugin | Funke Makanjuola | https://codepen.io/FunkeM/pen/NBEjJg -->
+
+<head>
+    <meta charset="UTF-8">
+    <title>Reverse Image Search Tool</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+
+        .alert {
+            display: none;
+        }
+
+        /* Add some styling to the SVG icon */
+        .icon {
+            width: 20px; /* Adjust size as needed */
+            height: 20px; /* Adjust size as needed */
+            fill: currentColor; /* This makes the icon inherit the text color */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container text-center mt-5">
+        <a href="Index.html"><img src="images/refresh.png"></a></br>
+        </br>
+        <h2><b><span style='background:rgb(0, 200, 122)'>Reverse Image Search</span></b></h2>
+        </br>
+        <a href="https://reverseimage.net/" target="_blank"><img src="images/reverseimagesearch.png" style="width:100px;height:100px;"></a></br>
+
+        <div class="col-md-6 offset-md-3 mt-4">
+            <div class="input-group mb-3">
+                <input type="text" id="imageurlQuery" class="form-control" placeholder="Image URL" aria-label="Image URL">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" id="imageurlSearchBtn">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6 .1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+                    </button>
+                </div>
+            </div>
+            <div id="imageurlAlert" class="alert alert-info" role="alert"></div>
+        </div>
+
+    <script>
+        document.getElementById('imageurlSearchBtn').onclick = function () {
+            const queryString = encodeURIComponent(document.getElementById('imageurlQuery').value);
+            const imageUrl1 = 'https://www.google.com/searchbyimage?image_url=' + queryString + '&uule=w+CAIQICIfTmV3IFlvcmssTmV3IFlvcmssVW5pdGVkIFN0YXRlcw&gl=us&sbisrc=cr_1_5_2&safe=off';
+            const imageUrl2 = 'https://lens.google.com/uploadbyurl?url=' + queryString + '&hl=en&re=df&ep=gsbubu';
+            const imageUrl3 = 'https://www.bing.com/images/search?view=detailv2&iss=sbi&form=SBIIRP&sbisrc=UrlPaste&q=imgurl:' + queryString;
+            const imageUrl4 = 'https://yandex.com/images/search?source=collections&rpt=imageview&url=' + queryString;
+            const imageUrl5 = 'https://www.tineye.com/search/?url=' + queryString;
+            const imageurlAlert = document.getElementById('imageurlAlert');
+
+            if (queryString) {
+                imageurlAlert.innerHTML = `
+                <a href='${imageUrl1}' target='_blank'>Google Reverse Image Search by URL</a><br><br>
+                <a href='${imageUrl2}' target='_blank'>Google Lens Search by URL</a><br><br>
+                <a href='${imageUrl3}' target='_blank'>Bing Reverse Image Search by URL</a><br><br>
+                <a href='${imageUrl4}' target='_blank'>Yandex Reverse Image Search by URL</a><br><br>
+                <a href='${imageUrl5}' target='_blank'>TinEye Reverse Image Search by URL</a>
+                `;
+                imageurlAlert.style.display = 'block';
+            } else {
+                imageurlAlert.style.display = 'none';
+            }
+        };
+    </script>
+</body>
+
+</html>
